@@ -1,0 +1,316 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0f0f13;
+  --surface: #1a1a24;
+  --surface2: #22222f;
+  --border: #2e2e3e;
+  --accent: #7c6aff;
+  --accent-hover: #9b8dff;
+  --danger: #ff5a6a;
+  --text: #e8e8f0;
+  --text-muted: #7a7a9a;
+  --green: #4ade80;
+  --radius: 12px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Roboto Mono', monospace;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Header */
+header h1 {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Clock */
+.clock-section {
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 24px;
+}
+
+#clock {
+  font-size: clamp(52px, 14vw, 80px);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  line-height: 1;
+}
+
+#date {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* Add Alarm */
+.add-alarm {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.add-alarm h2,
+.alarm-list-section h2 {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.alarm-list-section h2 span {
+  background: var(--surface2);
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 10px;
+  color: var(--accent);
+}
+
+.form-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+input[type="time"],
+input[type="text"] {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+input[type="time"] {
+  flex: 0 0 auto;
+  width: 130px;
+}
+
+input[type="text"] {
+  flex: 1;
+  min-width: 0;
+}
+
+input:focus {
+  border-color: var(--accent);
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+  border: none;
+  border-radius: 8px;
+  transition: background 0.15s, transform 0.1s;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+#add-btn {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+#add-btn:hover {
+  background: var(--accent-hover);
+}
+
+/* Alarm list */
+.alarm-list-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+#empty-msg {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 16px 0;
+}
+
+#alarm-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.alarm-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: border-color 0.15s;
+}
+
+.alarm-item.active {
+  border-color: var(--accent);
+}
+
+.alarm-item.firing {
+  border-color: var(--green);
+  animation: pulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+  to   { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.15); }
+}
+
+.alarm-toggle {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.alarm-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.alarm-time-text {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.alarm-label-text {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.delete-btn {
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 16px;
+  padding: 4px 8px;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  color: var(--danger);
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-card {
+  background: var(--surface);
+  border: 1px solid var(--green);
+  border-radius: 20px;
+  padding: 40px 48px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(74, 222, 128, 0.2);
+  animation: pop-in 0.25s ease;
+}
+
+@keyframes pop-in {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.overlay-icon {
+  font-size: 52px;
+  margin-bottom: 12px;
+  animation: shake 0.5s ease infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(-8deg); }
+  50%       { transform: rotate(8deg); }
+}
+
+#overlay-label {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+#overlay-time {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+#dismiss-btn {
+  background: var(--green);
+  color: #0f0f13;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  padding: 12px 36px;
+}
+
+#dismiss-btn:hover {
+  opacity: 0.85;
+}

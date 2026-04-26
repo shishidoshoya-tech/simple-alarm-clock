@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Alarm Clock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Alarm Clock</h1>
+    </header>
+
+    <section class="clock-section">
+      <div id="clock">00:00:00</div>
+      <div id="date">---</div>
+    </section>
+
+    <section class="add-alarm">
+      <h2>Add Alarm</h2>
+      <div class="form-row">
+        <input type="time" id="alarm-time" />
+        <input type="text" id="alarm-label" placeholder="Label (optional)" maxlength="30" />
+        <button id="add-btn">Add</button>
+      </div>
+    </section>
+
+    <section class="alarm-list-section">
+      <h2>Alarms <span id="alarm-count">0</span></h2>
+      <ul id="alarm-list"></ul>
+      <p id="empty-msg">No alarms set.</p>
+    </section>
+  </div>
+
+  <!-- Alarm firing overlay -->
+  <div id="overlay" class="overlay hidden">
+    <div class="overlay-card">
+      <div class="overlay-icon">⏰</div>
+      <p id="overlay-label">Alarm!</p>
+      <p id="overlay-time"></p>
+      <button id="dismiss-btn">Dismiss</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
