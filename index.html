@@ -3,46 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple Alarm Clock</title>
+  <title>Alarm Clock</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@300;400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
   <div class="container">
+
     <header>
-      <h1>Alarm Clock</h1>
+      <div class="logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></svg>
+        <span>Alarm Clock</span>
+      </div>
     </header>
 
-    <section class="clock-section">
-      <div id="clock">00:00:00</div>
-      <div id="date">---</div>
-    </section>
-
-    <section class="add-alarm">
-      <h2>Add Alarm</h2>
-      <div class="form-row">
-        <input type="time" id="alarm-time" />
-        <input type="text" id="alarm-label" placeholder="Label (optional)" maxlength="30" />
-        <button id="add-btn">Add</button>
+    <!-- Clock card -->
+    <section class="clock-card">
+      <div class="clock-glow"></div>
+      <div class="clock-inner">
+        <div class="ampm-badge" id="ampm">AM</div>
+        <div id="clock">00:00:00</div>
+        <div id="date">---</div>
+        <div class="next-alarm-hint" id="next-hint"></div>
       </div>
     </section>
 
-    <section class="alarm-list-section">
-      <h2>Alarms <span id="alarm-count">0</span></h2>
-      <ul id="alarm-list"></ul>
-      <p id="empty-msg">No alarms set.</p>
+    <!-- Add alarm -->
+    <section class="card add-alarm">
+      <h2>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+        New Alarm
+      </h2>
+      <div class="form-row">
+        <div class="input-wrap time-wrap">
+          <svg class="input-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <input type="time" id="alarm-time" />
+        </div>
+        <div class="input-wrap label-wrap">
+          <svg class="input-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          <input type="text" id="alarm-label" placeholder="Label (optional)" maxlength="30" />
+        </div>
+        <button id="add-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add
+        </button>
+      </div>
     </section>
+
+    <!-- Alarm list -->
+    <section class="card alarm-list-section">
+      <h2>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        Alarms
+        <span class="count-badge" id="alarm-count">0</span>
+      </h2>
+      <ul id="alarm-list"></ul>
+      <div class="empty-state" id="empty-msg">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <p>No alarms set</p>
+        <span>Add an alarm above to get started</span>
+      </div>
+    </section>
+
   </div>
 
-  <!-- Alarm firing overlay -->
+  <!-- Firing overlay -->
   <div id="overlay" class="overlay hidden">
     <div class="overlay-card">
+      <div class="overlay-rings">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+      </div>
       <div class="overlay-icon">⏰</div>
-      <p id="overlay-label">Alarm!</p>
-      <p id="overlay-time"></p>
-      <button id="dismiss-btn">Dismiss</button>
+      <p class="overlay-title" id="overlay-label">Alarm!</p>
+      <p class="overlay-time-text" id="overlay-time"></p>
+      <button id="dismiss-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Dismiss
+      </button>
     </div>
   </div>
 
